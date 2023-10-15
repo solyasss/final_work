@@ -4,33 +4,33 @@ using namespace std;
 
 expense_rating::expense_rating(string name) : Rating(name) {}
 
-void expense_rating::generate_rating(const vector<Transaction> &transactions, string period)
+void expense_rating::generate_rating(const Transaction transactions[], int num_transactions, string period)
 {
-    cout << "Generating expense rating for " << period << ": " << get_rating_name() << endl;
+    cout << "Your expense rating for " << period << ": " << get_rating_name() << endl;
 
-    vector<Transaction> top_three_expenses;
+    Expense top_three_expenses[3];
 
-    for (const Transaction &transaction : transactions)
+    for (int i = 0; i < num_transactions; i++)
     {
-        if (top_three_expenses.empty() || transaction.get_amount() > top_three_expenses.back().get_amount())
+        for (int j = 0; j < 3; j++)
         {
-            top_three_expenses.push_back(transaction);
-
-            for (size_t i = top_three_expenses.size() - 1; i > 0 && top_three_expenses[i].get_amount() > top_three_expenses[i - 1].get_amount(); i--)
+            if (j == 0 || transactions[i].get_amount() > top_three_expenses[j - 1].transaction.get_amount())
             {
-                swap(top_three_expenses[i], top_three_expenses[i - 1]);
-            }
-
-            if (top_three_expenses.size() > 3)
-            {
-                top_three_expenses.pop_back();
+                for (int k = 2; k > j; k--)
+                {
+                    top_three_expenses[k] = top_three_expenses[k - 1];
+                }
+                top_three_expenses[j].transaction = transactions[i];
+                top_three_expenses[j].position = j + 1;
+                break;
             }
         }
     }
 
-    for (size_t i = 0; i < top_three_expenses.size(); i++)
+    for (int i = 0; i < 3; i++)
     {
-        const Transaction &transaction = top_three_expenses[i];
-        cout << "Here is your rank " << (i + 1) << ": " << transaction.get_category() << " -" << transaction.get_amount() << endl;
+        const Transaction &transaction = top_three_expenses[i].transaction;
+        int position = top_three_expenses[i].position;
+        cout << " Your rank " << position << ": " << transaction.get_category() << " : " << transaction.get_amount() << endl;
     }
 }

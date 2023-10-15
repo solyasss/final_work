@@ -16,9 +16,9 @@ void monthly_report::set_previous_month(double balance)
 
 void monthly_report::generate_report()
 {
-    cout << "Generating monthly report from " << get_begin_date() << " to " << get_end_date() << endl;
+    cout << "Your monthly report from " << get_begin_date() << " to " << get_end_date() << endl;
 
     double balance_difference = current_month_balance - previous_month_balance;
 
-    cout << "Balance difference: " << balance_difference << endl;
+    cout << "Balance distinction: " << balance_difference << endl;
 }
