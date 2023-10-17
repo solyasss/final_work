@@ -26,6 +26,8 @@ void category_rating::generate_rating(const Transaction transactions[], int num_
         if (transaction.get_date() == period)
         {
             bool found = false;
+
+            // ⁡⁣⁢⁣check if the category is already in the category array⁡
             for (int j = 0; j < num; j++)
             {
                 if (category[j].name == transaction.get_category())
@@ -35,6 +37,8 @@ void category_rating::generate_rating(const Transaction transactions[], int num_
                     break;
                 }
             }
+
+            // ⁡⁣⁢⁣if the category is not found, add it to the array⁡
             if (!found)
             {
                 category[num].name = transaction.get_category();
@@ -44,6 +48,7 @@ void category_rating::generate_rating(const Transaction transactions[], int num_
         }
     }
 
+    // ⁡⁣⁢⁣sort the categories ⁡
     for (int i = 1; i < num; i++)
     {
         Category obj = category[i];
@@ -56,6 +61,7 @@ void category_rating::generate_rating(const Transaction transactions[], int num_
         category[j + 1] = obj;
     }
 
+    // ⁡⁣⁢⁣display the top 3 ranked categories⁡
     for (int i = 0; i < 3 && i < num; i++)
     {
         cout << " Your rank " << (i + 1) << ": " << category[i].name << " : " << category[i].sum << endl;

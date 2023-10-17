@@ -18,6 +18,7 @@ void weekly_report::generate_report()
 {
     cout << "Your weekly report from : " << get_begin_date() << " to " << get_end_date() << endl;
 
+    // ⁡⁣⁢⁣calculate the balance difference between the current and previous weeks⁡
     double balance_difference = current_week_balance - previous_week_balance;
 
     cout << "Balance distinction : " << balance_difference << endl;
